@@ -34,7 +34,9 @@ public class Maze {
         this.colNumber = colNumber;
     }
 
-    public Maze(int y, int x) {
+    public Maze(int row, int col) {
+        this.setColNumber(col);
+        this.setRowNumber(row);
     }
 
     public static void main(String[] args) {
