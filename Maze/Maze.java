@@ -40,6 +40,10 @@ public class Maze {
     }
 
     public static void main(String[] args) {
-
+        AbstractMazeGenerator a = null;
+        a = new DFSMazeGenerator();
+        MazeBoard[][] mazeBoard = new MazeBoard[22][22];
+        int x = 20, y = 20;
+        a.GenerateMaze(mazeBoard, x, y);
     }
 }

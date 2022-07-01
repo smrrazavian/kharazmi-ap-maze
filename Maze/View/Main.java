@@ -1,3 +1,5 @@
+package Maze.View;
+
 import javax.swing.SwingUtilities;
 
 public class Main {
@@ -7,9 +9,9 @@ public class Main {
             @Override
             public void run() {
                 new MainFrame();
-                
+
             }
-            
+
         });
     }
 }
