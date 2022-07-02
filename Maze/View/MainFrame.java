@@ -13,12 +13,15 @@ public class MainFrame extends JFrame {
         super("Hezar Too | هزار تو");
         setSize(800, 700);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
         setLayout(new BorderLayout());
+        setVisible(true);
+
         settingPanel = new SettingsPanel();
-        gamePanel = new GamePanel();
         add(settingPanel, BorderLayout.NORTH);
+
+        gamePanel = new GamePanel();
         add(gamePanel, BorderLayout.CENTER);
+
         signIn = new SignIn(this);
     }
 }
