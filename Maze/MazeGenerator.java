@@ -27,7 +27,7 @@ class DFSMazeGenerator extends AbstractMazeGenerator {
             ++random;
             if (!isOutOfBorder(x, y, colNumber, rowNumber) && !mazeBoard[y][x].isPassable()) {
                 mazeBoard[y][x].setPassable(true);
-                mazeBoard[point.y + aroundPoints[j + 1] / 2][point.y + aroundPoints[j] / 2].setPassable(true);
+                mazeBoard[point.y + aroundPoints[j + 1] / 2][point.x + aroundPoints[j] / 2].setPassable(true);
                 return new Point(x, y);
             }
         }
