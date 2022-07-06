@@ -93,7 +93,7 @@ public class Maze extends JPanel {
         panel = new JPanel();
 		panel.setLayout(new GridLayout(1, 4));
 		add(panel, BorderLayout.NORTH);
-		panel.add(timeLabel);Graphics2D
+		panel.add(timeLabel);
 		panel.add(getTimeText());
 		panel.add(stepLabel);
 		panel.add(getStepNumberText());

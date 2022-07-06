@@ -15,7 +15,7 @@ abstract class AbstractSolveMaze {
             return (x > colNumber || y > rowNumber || x < 1 || y < 1) ? true : false;
     }
 
-    abstract Stack<Point> solveMaze(MazeBoard[][] mazeLattice, Point entrance, Point exit, int colNumber,
+    abstract Stack<Point> solveMaze(MazeBoard[][] mazeBoard, Point entrance, Point exit, int colNumber,
             int rowNumber);
 }
 
