@@ -19,8 +19,8 @@ abstract class AbstractSolveMaze {
             int rowNumber);
 }
 
-class DepthFirstSearchSolveMaze extends AbstractSolveMaze {
-    protected Point AroundPointDepthFirst(MazeBoard[][] mazeBoard, Point p, int colNumber, int rowNumber) {
+class DFSSolveMaze extends AbstractSolveMaze {
+    protected Point AroundPoint(MazeBoard[][] mazeBoard, Point p, int colNumber, int rowNumber) {
         final int[] aroundPoint = { -1, 0, 1, 0, -1 };
         for (int i = 0; i < 4;) {
             int x = p.x + aroundPoint[i];
@@ -48,7 +48,7 @@ class DepthFirstSearchSolveMaze extends AbstractSolveMaze {
         pathDeque.addLast(entrance);
         Point currentPoint = entrance;
         while (!currentPoint.equals(end)) {
-            currentPoint = AroundPointDepthFirst(mazeBoard, currentPoint, colNumber, rowNumber);
+            currentPoint = AroundPoint(mazeBoard, currentPoint, colNumber, rowNumber);
             if (currentPoint == null) {
                 pathDeque.removeLast();
                 if (pathDeque.isEmpty())

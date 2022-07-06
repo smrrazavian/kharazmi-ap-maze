@@ -2,8 +2,8 @@ package Maze;
 
 import javax.swing.JPanel;
 
-public class MazeFrame extends JPanel {
-    public MazeFrame() {
+public class MazePanel extends JPanel {
+    public MazePanel() {
         this.setVisible(true);
 
     }
