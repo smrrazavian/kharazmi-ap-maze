@@ -1,5 +1,12 @@
 package View;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -12,13 +19,6 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import java.awt.event.MouseEvent;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.event.MouseAdapter;
 
 public class MainFrame extends JFrame {
     private SignIn signIn;
@@ -44,15 +44,22 @@ public class MainFrame extends JFrame {
     public static boolean isSolved = false;
 
     public MainFrame() {
-
         super("Maze");
         setSize(800, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
         setLayout(new BorderLayout());
         signIn = new SignIn(this);
+        initializeComponents();
+        setVisible(true);
+        revalidate();
+        repaint();
+    }
+
+    private void initializeComponents() {
         maze = new Maze(15, 15);
         maze.setBackground(Color.white);
+
+        // Initialize settingPanel
         settingPanel = new JPanel(new FlowLayout());
         settingPanel.setBorder(new TitledBorder("Settings"));
         myProfile = new JButton("My Profile");
@@ -62,8 +69,8 @@ public class MainFrame extends JFrame {
         solution = new JButton("Solution");
         zoomLabel = new JLabel("Zoom: ");
         zoom = new JSpinner();
-        difficulties = new JComboBox<String>();
-        DefaultComboBoxModel<String> cmb = new DefaultComboBoxModel<String>();
+        difficulties = new JComboBox<>();
+        DefaultComboBoxModel<String> cmb = new DefaultComboBoxModel<>();
         cmb.addElement("Easy");
         cmb.addElement("Medium");
         cmb.addElement("Hard");
@@ -76,9 +83,23 @@ public class MainFrame extends JFrame {
         settingPanel.add(zoomLabel);
         settingPanel.add(zoom);
         zoom.setModel(new SpinnerNumberModel(15, 5, 30, 1));
-
         settingPanel.add(zoom);
         settingPanel.add(apply);
+        add(settingPanel, BorderLayout.NORTH);
+        gamePanel = new JPanel();
+        gamePanel.setBorder(BorderFactory.createEtchedBorder());
+        gamePanel.setLayout(new BorderLayout(0, 0));
+        gamePanel1 = new JPanel();
+        gamePanel1.setBorder(BorderFactory.createEtchedBorder());
+        restart = new JButton("Restart");
+        hint = new JButton("Hint");
+        gamePanel1.add(restart);
+        gamePanel1.add(hint);
+        gamePanel1.add(solution);
+        gamePanel.add(gamePanel1, BorderLayout.NORTH);
+        gamePanel.add(maze);
+        add(gamePanel, BorderLayout.CENTER);
+
         apply.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -129,12 +150,9 @@ public class MainFrame extends JFrame {
             }
         });
 
-        zoom.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                maze.setLatticeWidth(Integer.parseInt(zoom.getValue().toString()));
-                maze.repaint();
-            }
+        zoom.addChangeListener((ChangeEvent e) -> {
+            maze.setLatticeWidth(Integer.parseInt(zoom.getValue().toString()));
+            maze.repaint();
         });
         add(settingPanel, BorderLayout.NORTH);
         gamePanel = new JPanel();
@@ -201,6 +219,14 @@ public class MainFrame extends JFrame {
                 } else {
                     allTimeScore.setVisible(true);
                 }
+            }
+        });
+
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                revalidate();
+                repaint();
             }
         });
     }

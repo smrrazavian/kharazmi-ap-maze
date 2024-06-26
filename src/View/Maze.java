@@ -33,8 +33,9 @@ final class Maze extends JPanel {
 	private Ball ball;
 	private Lattice[][] mazeLattice;
 	private boolean startTiming = false;
-	private JPanel panel = new JPanel();
-	private JTextField timeText = new Timers(), stepNumberText = new JTextField("0");
+	private final JPanel panel = new JPanel();
+	private final JTextField timeText = new Timers();
+	private final JTextField stepNumberText = new JTextField("0");
 	private Thread thread = null;
 	private int stepNumber;
 	private static final char DepthFirstSearchSolveMaze = 0;
